@@ -1,0 +1,26 @@
+{
+  "HomePage": {
+    "title": "Kylie",
+    "subtitle": "Your beauty deserves the best",
+    "cta": "Shop Now",
+    "description": "An elegant cosmetics store offering the finest beauty products"
+  },
+  "Common": {
+    "siteName": "Kylie",
+    "shop": "Shop",
+    "cart": "Cart",
+    "favorites": "Favorites",
+    "orders": "My Orders",
+    "addToCart": "Add to Cart",
+    "addToFavorites": "Add to Favorites",
+    "viewAll": "View All",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "tryAgain": "Try Again"
+  },
+  "Badges": {
+    "new": "New",
+    "offer": "Offer",
+    "bestSeller": "Best Seller"
+  }
+}
