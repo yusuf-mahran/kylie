@@ -187,16 +187,85 @@ Establish the visual identity, localization system, and design tokens before any
 
 Allow the store owner to edit landing page content from the admin dashboard without touching code.
 
+### Image Storage — Cloudinary
+
+All CMS image uploads go through **Cloudinary**. Supabase stores the Cloudinary `public_id` and `secure_url` together as a `jsonb` asset object — never a bare URL. The `public_id` is required to delete the asset from Cloudinary when an image is removed or replaced.
+
+**Upload flow:**
+
+1. Admin selects an image in the dashboard
+2. Client uploads directly to Cloudinary via `<CldUploadWidget />` using an unsigned upload preset
+3. Cloudinary returns an upload result object containing `public_id` and `secure_url`
+4. Both fields are saved to Supabase as a `CloudinaryAsset` object via the repository
+
+**Delete flow:**
+
+1. Admin removes or replaces an image
+2. A Next.js **Server Action** receives the `public_id`
+3. Server Action calls Cloudinary's Destroy API using `CLOUDINARY_API_SECRET` (never exposed to client)
+4. On success, the repository removes the asset record from Supabase
+
+**Cloudinary folder structure:**
+
+```
+kylie/
+├── cms/
+│   ├── hero/
+│   ├── vision/
+│   ├── about/
+│   └── footer/
+└── reels/
+    └── covers/
+```
+
+**Environment variables required:**
+
+```env
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=   # unsigned preset for client-side upload
+CLOUDINARY_API_KEY=                      # server-side only
+CLOUDINARY_API_SECRET=                   # server-side only
+```
+
+**Shared type: `lib/cloudinary/types.ts`**
+
+```ts
+export type CloudinaryAsset = {
+  public_id: string; // e.g. "kylie/cms/hero/abc123"
+  secure_url: string; // e.g. "https://res.cloudinary.com/..."
+};
+```
+
+**Server utility: `lib/cloudinary/delete.ts`**
+
+```ts
+// Server-side only — never import in client components
+export async function deleteFromCloudinary(publicId: string): Promise<void>;
+// Calls Cloudinary Destroy API with API key + secret
+```
+
+**Server Action: `actions/cloudinary.actions.ts`**
+
+```ts
+'use server';
+export async function deleteCloudinaryAsset(publicId: string): Promise<void>;
+// Validates admin session, then calls deleteFromCloudinary(publicId)
+```
+
+Use `next-cloudinary` package for the admin image picker component (`<CldUploadWidget />`).
+
+---
+
 ### Scope
 
 **Supabase Table: `cms_sections`**
 
 ```sql
 id            uuid primary key
-section_key   text unique  -- 'hero' | 'vision' | 'about' | 'footer' | 'reels'
+section_key   text unique  -- 'hero' | 'vision' | 'about' | 'footer'
 content_ar    jsonb
 content_en    jsonb
-image_urls    text[]
+images        jsonb[]      -- CloudinaryAsset[] { public_id, secure_url }
 is_active     boolean default true
 sort_order    int
 updated_at    timestamptz
@@ -205,20 +274,20 @@ updated_at    timestamptz
 **Supabase Table: `cms_social_links`**
 
 ```sql
-id       uuid primary key
-platform text  -- 'instagram' | 'tiktok' | 'facebook' | 'whatsapp'
-url      text
+id        uuid primary key
+platform  text     -- 'instagram' | 'tiktok' | 'facebook' | 'whatsapp'
+url       text
 is_active boolean
 ```
 
 **Supabase Table: `cms_reels`**
 
 ```sql
-id         uuid primary key
-video_url  text
-cover_url  text
-sort_order int
-is_active  boolean
+id           uuid primary key
+video_url    text    -- external video URL (YouTube / TikTok embed, or direct mp4)
+cover_image  jsonb   -- CloudinaryAsset { public_id, secure_url }
+sort_order   int
+is_active    boolean
 ```
 
 **Repository: `CmsRepository`**
@@ -228,16 +297,41 @@ is_active  boolean
 - `updateSection(key, data): Promise<void>` (admin only)
 - `getSocialLinks(): Promise<SocialLink[]>`
 - `getReels(): Promise<Reel[]>`
+- `addSectionImage(key, asset: CloudinaryAsset): Promise<void>` (admin only — appends to `images` array)
+- `removeSectionImage(key, publicId: string): Promise<void>` (admin only — removes matching asset from `images` array)
+- `updateReelCover(id, asset: CloudinaryAsset): Promise<void>` (admin only — replaces `cover_image`, triggers delete of old `public_id`)
 
-**Image uploads** via Supabase Storage bucket `cms-images`.
+---
+
+### Admin Upload Component
+
+```tsx
+// components/admin/cms/ImageUploadField.tsx
+import { CldUploadWidget } from 'next-cloudinary';
+
+// On upload success: extract { public_id, secure_url } from the result
+// and pass both as a CloudinaryAsset to the onUpload callback
+// Never store secure_url alone — always pair with public_id
+```
+
+On **replace**: call `deleteCloudinaryAsset(oldAsset.public_id)` via Server Action before saving the new asset.
+
+On **remove**: call `deleteCloudinaryAsset(asset.public_id)` via Server Action, then call `removeSectionImage` on the repository.
+
+No intermediate state — both the Cloudinary delete and the Supabase update complete before the UI reflects the change.
+
+---
 
 ### Acceptance Criteria
 
 - [ ] All landing page text is sourced from `cms_sections`
-- [ ] Admin can edit any section content and it reflects immediately
-- [ ] Images upload to Supabase Storage and URL is saved in DB
-- [ ] Arabic and English content stored independently per section
+- [ ] Admin can edit any section content and it reflects on the landing page without a code deploy
+- [ ] Every uploaded image is stored as `{ public_id, secure_url }` — never a bare URL
+- [ ] Deleting or replacing an image calls the Cloudinary Destroy API via a Server Action using the stored `public_id`
+- [ ] `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` are used server-side only — never in client components
+- [ ] Arabic and English content stored independently per section (`content_ar` / `content_en`)
 - [ ] Sections can be reordered via `sort_order`
+- [ ] Reel cover images stored as `CloudinaryAsset` in `cover_image` jsonb column
 
 ---
 
@@ -254,13 +348,13 @@ Build the full product data infrastructure: categories, subcategories, products,
 `categories`
 
 ```sql
-id         uuid primary key
-slug       text unique
-name_ar    text
-name_en    text
-image_url  text
-sort_order int
-is_active  boolean
+id          uuid primary key
+slug        text unique
+name_ar     text
+name_en     text
+image       jsonb   -- CloudinaryAsset { public_id, secure_url }
+sort_order  int
+is_active   boolean
 ```
 
 `subcategories`
@@ -300,10 +394,12 @@ created_at       timestamptz
 ```sql
 id          uuid primary key
 product_id  uuid references products
-url         text
+image       jsonb   -- CloudinaryAsset { public_id, secure_url }
 sort_order  int
 is_primary  boolean default false
 ```
+
+> All image columns in catalog tables use `CloudinaryAsset { public_id, secure_url }` (defined in `lib/cloudinary/types.ts`). The `public_id` is used when deleting a product, a category, or a specific image from the admin dashboard — calling `deleteCloudinaryAsset(public_id)` via Server Action before removing the DB row.
 
 **Repository: `ProductRepository`**
 
