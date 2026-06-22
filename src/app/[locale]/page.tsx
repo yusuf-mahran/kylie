@@ -8,6 +8,11 @@ import { BrandBadge } from '@/components/shared/brand-badge';
 import { SectionWrapper } from '@/components/shared/section-wrapper';
 import { createServerClient } from '@/lib/supabase/server';
 import { CmsRepository } from '@/repositories/cms.repository';
+import {
+  getFeaturedProducts,
+  getBestSellers,
+} from '@/features/catalog/server-utils';
+import ProductGrid from '@/components/shop/product-grid';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -17,19 +22,31 @@ async function getCmsData() {
   try {
     const supabase = createServerClient();
     const repo = new CmsRepository(supabase);
-    const sections = await repo.getAllSections();
-    const socialLinks = await repo.getSocialLinks();
-    const reels = await repo.getReels();
-    return { sections, socialLinks, reels };
+    const [sections, socialLinks, reels, featured, bestSellers] =
+      await Promise.all([
+        repo.getAllSections(),
+        repo.getSocialLinks(),
+        repo.getReels(),
+        getFeaturedProducts(4).catch(() => []),
+        getBestSellers(4).catch(() => []),
+      ]);
+    return { sections, socialLinks, reels, featured, bestSellers };
   } catch {
-    return { sections: [], socialLinks: [], reels: [] };
+    return {
+      sections: [],
+      socialLinks: [],
+      reels: [],
+      featured: [],
+      bestSellers: [],
+    };
   }
 }
 
 export default async function HomePage({ params }: Props) {
   const { locale: currentLocale } = await params;
   const t = await getTranslations();
-  const { sections, socialLinks, reels } = await getCmsData();
+  const { sections, socialLinks, reels, featured, bestSellers } =
+    await getCmsData();
 
   const hero = sections.find((s) => s.section_key === 'hero' && s.is_active);
   const heroContent = hero
@@ -45,14 +62,16 @@ export default async function HomePage({ params }: Props) {
       {displayContent && (
         <div className="flex flex-col items-center gap-4 text-center mb-12">
           {displayContent.headline && (
-            <Heading as="h1" size="4xl">{displayContent.headline}</Heading>
+            <Heading as="h1" size="4xl">
+              {displayContent.headline}
+            </Heading>
           )}
           {displayContent.subheading && (
-            <BodyText size="lg" muted>{displayContent.subheading}</BodyText>
+            <BodyText size="lg" muted>
+              {displayContent.subheading}
+            </BodyText>
           )}
-          {displayContent.body && (
-            <BodyText>{displayContent.body}</BodyText>
-          )}
+          {displayContent.body && <BodyText>{displayContent.body}</BodyText>}
           {displayContent.cta && (
             <BrandButton asChild>
               <Link href="/shop">{displayContent.cta}</Link>
@@ -102,6 +121,30 @@ export default async function HomePage({ params }: Props) {
                 {link.platform}
               </a>
             ))}
+        </div>
+      )}
+
+      {featured.length > 0 && (
+        <div className="mt-12 pt-8 border-t">
+          <Heading as="h2" size="2xl" className="mb-6">
+            {t('Badges.bestSeller')}
+          </Heading>
+          <ProductGrid
+            products={featured}
+            locale={currentLocale as 'ar' | 'en'}
+          />
+        </div>
+      )}
+
+      {bestSellers.length > 0 && (
+        <div className="mt-12 pt-8 border-t">
+          <Heading as="h2" size="2xl" className="mb-6">
+            {t('Badges.bestSeller')}
+          </Heading>
+          <ProductGrid
+            products={bestSellers}
+            locale={currentLocale as 'ar' | 'en'}
+          />
         </div>
       )}
 

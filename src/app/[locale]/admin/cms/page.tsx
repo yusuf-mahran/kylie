@@ -42,6 +42,19 @@ export default async function CmsAdminPage({ params }: Props) {
         >
           {t('reels')}
         </Link>
+        <BodyText size="lg" muted className="mt-6">{t('catalog')}</BodyText>
+        <Link
+          href="/admin/categories"
+          className="border rounded-md p-4 hover:bg-sand transition-colors"
+        >
+          {t('categories')}
+        </Link>
+        <Link
+          href="/admin/products"
+          className="border rounded-md p-4 hover:bg-sand transition-colors"
+        >
+          {t('products')}
+        </Link>
       </div>
     </SectionWrapper>
   );
