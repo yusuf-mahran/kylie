@@ -1,0 +1,55 @@
+{
+  "folders": [
+    {
+      "name": "🗺️ root",
+      "path": ".",
+    },
+    {
+      "name": "🦄 public",
+      "path": "public/",
+    },
+    {
+      "name": "🧮 app",
+      "path": "src/app",
+    },
+    {
+      "name": "🧩 components",
+      "path": "./src/components",
+    },
+    {
+      "name": "🧰 lib",
+      "path": "./src/lib",
+    },
+    {
+      "name": "🔌 providers",
+      "path": "./src/providers",
+    },
+    {
+      "name": "🧮 types",
+      "path": "./src/types",
+    },
+    {
+      "name": "📝 messages",
+      "path": "./src/messages",
+    },
+    {
+      "name": "🌍 i18n",
+      "path": "./src/i18n",
+    },
+    {
+      // supabase
+      "name": "🗄️ supabase",
+      "path": "./supabase",
+    },
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/.git": true,
+      "**/.vscode": true,
+      "**/.next": true,
+    },
+  },
+}
