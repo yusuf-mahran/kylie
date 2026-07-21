@@ -1,6 +1,10 @@
-import { useTranslations } from 'next-intl';
+import Hero from '@/components/landing/Hero';
 
 export default function HomePage() {
-  const t = useTranslations('HomePage');
-  return <h1>{t('title')}</h1>;
+  return (
+    <div className="w-full min-h-dvh bg-background text-foreground space-y-4">
+      <Hero />
+      <Hero />
+    </div>
+  );
 }

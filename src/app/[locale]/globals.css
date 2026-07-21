@@ -1,0 +1,277 @@
+@import 'tailwindcss';
+
+:root {
+  /* Primary Colors */
+  --color-primary-50: #faf5f7;
+  --color-primary-100: #f6e9ed;
+  --color-primary-200: #f0c7d4;
+  --color-primary-300: #ec8dad;
+  --color-primary-400: #f03775;
+  --color-primary-500: #e1054e;
+  --color-primary-600: #ab083e;
+  --color-primary-700: #800931;
+  --color-primary-800: #5d0925;
+  --color-primary-900: #3d0a1b;
+  --color-primary-950: #250912;
+
+  /* Secondary Colors */
+  --color-secondary-50: #faf5f7;
+  --color-secondary-100: #f6e9ee;
+  --color-secondary-200: #f0c7d5;
+  --color-secondary-300: #ec8dad;
+  --color-secondary-400: #f03875;
+  --color-secondary-500: #e1054f;
+  --color-secondary-600: #aa083f;
+  --color-secondary-700: #800a31;
+  --color-secondary-800: #5c0a25;
+  --color-secondary-900: #3d0a1b;
+  --color-secondary-950: #250912;
+
+  /* Accent Colors */
+  --color-accent-50: #faf5f7;
+  --color-accent-100: #f6e9ed;
+  --color-accent-200: #f0c7d4;
+  --color-accent-300: #ec8dad;
+  --color-accent-400: #f03775;
+  --color-accent-500: #e1054d;
+  --color-accent-600: #ab083e;
+  --color-accent-700: #800931;
+  --color-accent-800: #5d0925;
+  --color-accent-900: #3d0a1b;
+  --color-accent-950: #250912;
+
+  /* Neutral Colors */
+  --color-neutral-50: #f7f7f8;
+  --color-neutral-100: #efeff1;
+  --color-neutral-200: #d8dbdf;
+  --color-neutral-300: #b5bbc5;
+  --color-neutral-400: #8491a4;
+  --color-neutral-500: #606f85;
+  --color-neutral-600: #4b5767;
+  --color-neutral-700: #3b434f;
+  --color-neutral-800: #2c323a;
+  --color-neutral-900: #1f2328;
+  --color-neutral-950: #151719;
+
+  /* Semantic Colors */
+  --color-success: #21c46b;
+  --color-warning: #f5b20a;
+  --color-error: #f05338;
+  --color-info: #3c74f6;
+
+  /* Base surface colors — mapped from neutral scale */
+  --color-background: var(--color-secondary-50);
+  --color-foreground: var(--color-neutral-900);
+  --color-surface: #ffffff;
+  --color-border: var(--color-neutral-200);
+
+  /* Type Scale */
+  --font-size-xs: 0.64rem;
+  --line-height-xs: 1rem;
+  --letter-spacing-xs: 0.025em;
+  --font-size-sm: 0.8rem;
+  --line-height-sm: 1.25rem;
+  --letter-spacing-sm: 0.025em;
+  --font-size-base: 1rem;
+  --line-height-base: 1.5rem;
+  --letter-spacing-base: 0em;
+  --font-size-lg: 1.25rem;
+  --line-height-lg: 1.75rem;
+  --letter-spacing-lg: -0.01em;
+  --font-size-xl: 1.563rem;
+  --line-height-xl: 1.75rem;
+  --letter-spacing-xl: -0.01em;
+  --font-size-2xl: 1.953rem;
+  --line-height-2xl: 2rem;
+  --letter-spacing-2xl: -0.02em;
+  --font-weight-2xl: 600;
+  --font-size-3xl: 2.441rem;
+  --line-height-3xl: 2.25rem;
+  --letter-spacing-3xl: -0.02em;
+  --font-weight-3xl: 700;
+  --font-size-4xl: 3.052rem;
+  --line-height-4xl: 2.5rem;
+  --letter-spacing-4xl: -0.04em;
+  --font-weight-4xl: 700;
+  --font-size-5xl: 3.815rem;
+  --line-height-5xl: 1;
+  --letter-spacing-5xl: -0.04em;
+  --font-weight-5xl: 800;
+  --font-size-6xl: 4.768rem;
+  --line-height-6xl: 1;
+  --letter-spacing-6xl: -0.04em;
+  --font-weight-6xl: 800;
+
+  /* Spacing */
+  --spacing-0: 4px;
+  --spacing-1: 8px;
+  --spacing-2: 12px;
+  --spacing-3: 16px;
+  --spacing-4: 24px;
+  --spacing-5: 32px;
+  --spacing-6: 48px;
+  --spacing-7: 64px;
+  --spacing-8: 96px;
+  --spacing-9: 128px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  --shadow-xl:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+
+  /* Border Radius */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.75rem;
+  --radius-full: 9999px;
+}
+
+/* Locale-driven font roles — see fonts/ar.ts and fonts/en.ts */
+.ar-fonts {
+  --font-heading: var(--font-tajawal);
+  --font-body: var(--font-cairo);
+}
+
+.en-fonts {
+  --font-heading: var(--font-amiri);
+  --font-body: var(--font-inter);
+}
+
+@theme inline {
+  --color-primary-50: var(--color-primary-50);
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-300: var(--color-primary-300);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-700: var(--color-primary-700);
+  --color-primary-800: var(--color-primary-800);
+  --color-primary-900: var(--color-primary-900);
+  --color-primary-950: var(--color-primary-950);
+
+  --color-secondary-50: var(--color-secondary-50);
+  --color-secondary-100: var(--color-secondary-100);
+  --color-secondary-200: var(--color-secondary-200);
+  --color-secondary-300: var(--color-secondary-300);
+  --color-secondary-400: var(--color-secondary-400);
+  --color-secondary-500: var(--color-secondary-500);
+  --color-secondary-600: var(--color-secondary-600);
+  --color-secondary-700: var(--color-secondary-700);
+  --color-secondary-800: var(--color-secondary-800);
+  --color-secondary-900: var(--color-secondary-900);
+  --color-secondary-950: var(--color-secondary-950);
+
+  --color-accent-50: var(--color-accent-50);
+  --color-accent-100: var(--color-accent-100);
+  --color-accent-200: var(--color-accent-200);
+  --color-accent-300: var(--color-accent-300);
+  --color-accent-400: var(--color-accent-400);
+  --color-accent-500: var(--color-accent-500);
+  --color-accent-600: var(--color-accent-600);
+  --color-accent-700: var(--color-accent-700);
+  --color-accent-800: var(--color-accent-800);
+  --color-accent-900: var(--color-accent-900);
+  --color-accent-950: var(--color-accent-950);
+
+  --color-neutral-50: var(--color-neutral-50);
+  --color-neutral-100: var(--color-neutral-100);
+  --color-neutral-200: var(--color-neutral-200);
+  --color-neutral-300: var(--color-neutral-300);
+  --color-neutral-400: var(--color-neutral-400);
+  --color-neutral-500: var(--color-neutral-500);
+  --color-neutral-600: var(--color-neutral-600);
+  --color-neutral-700: var(--color-neutral-700);
+  --color-neutral-800: var(--color-neutral-800);
+  --color-neutral-900: var(--color-neutral-900);
+  --color-neutral-950: var(--color-neutral-950);
+
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+  --color-info: var(--color-info);
+
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-surface: var(--color-surface);
+  --color-border: var(--color-border);
+
+  --font-heading: var(--font-heading), 'sans-serif';
+  --font-body: var(--font-body), 'sans-serif';
+
+  --font-size-xs: var(--font-size-xs);
+  --font-size-sm: var(--font-size-sm);
+  --font-size-base: var(--font-size-base);
+  --font-size-lg: var(--font-size-lg);
+  --font-size-xl: var(--font-size-xl);
+  --font-size-2xl: var(--font-size-2xl);
+  --font-size-3xl: var(--font-size-3xl);
+  --font-size-4xl: var(--font-size-4xl);
+  --font-size-5xl: var(--font-size-5xl);
+  --font-size-6xl: var(--font-size-6xl);
+
+  --spacing-0: var(--spacing-0);
+  --spacing-1: var(--spacing-1);
+  --spacing-2: var(--spacing-2);
+  --spacing-3: var(--spacing-3);
+  --spacing-4: var(--spacing-4);
+  --spacing-5: var(--spacing-5);
+  --spacing-6: var(--spacing-6);
+  --spacing-7: var(--spacing-7);
+  --spacing-8: var(--spacing-8);
+  --spacing-9: var(--spacing-9);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-full: var(--radius-full);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body, sans-serif);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-primary-200);
+  color: var(--color-foreground);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-secondary-600);
+  border-radius: 6px;
+  border: 3px solid var(--color-secondary-100);
+}
