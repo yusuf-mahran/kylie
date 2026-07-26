@@ -10,9 +10,14 @@
     "update-types": "pnpx supabase gen types typescript --local > src/lib/supabase/database.types.ts"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^9.2.0",
+    "@mui/material": "^9.2.0",
     "@supabase/ssr": "^0.12.0",
     "@supabase/supabase-js": "^2.110.0",
     "clsx": "^2.1.1",
+    "motion": "^12.42.2",
     "next": "16.2.9",
     "next-intl": "^4.13.2",
     "react": "19.2.4",

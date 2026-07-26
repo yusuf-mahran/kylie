@@ -1,7 +1,7 @@
-import { Roboto, Amiri } from 'next/font/google';
+import { Onest, Amiri } from 'next/font/google';
 
-const roboto = Roboto({
-  variable: '--font-roboto',
+const onest = Onest({
+  variable: '--font-onest',
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
@@ -14,5 +14,5 @@ const amiri = Amiri({
   display: 'swap',
 });
 
-export const fontVariables = `${roboto.variable} ${amiri.variable}`;
+export const fontVariables = `${onest.variable} ${amiri.variable}`;
 export const fontClassNames = 'en-fonts';

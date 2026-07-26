@@ -1,7 +1,69 @@
 {
+  "Navbar": {
+    "logo": "Kylie",
+    "links": [
+      { "label": "Home", "href": "/" },
+      { "label": "About", "href": "/about" },
+      { "label": "Catalog", "href": "/catalog" },
+      { "label": "Collection", "href": "/collection" }
+    ],
+    "cta": "Login",
+    "bottomQuote": "You Deserve Better"
+  },
   "Hero": {
-    "headline": "Kylie",
-    "subheading": "Your beauty deserves the best",
-    "cta": "Shop Now"
+    "flag": "Care your skin Naturally",
+    "headline": "Skin glows naturally when you use this product",
+    "iconText": "because Your beauty deserves the best",
+    "cta": "Shop Now",
+    "secondaryFlag": "Care your skin Naturally",
+    "secondaryHeadline": "Always be Gentle with your face",
+    "percentage": "100%",
+    "percentTitle": "Organic",
+    "bottomFlag": "Let your skin glow the natural way",
+    "bottomText": "Natural facial skincare must be in every beauty"
+  },
+  "Footer": {
+    "mailText": "Products that emphasizes you, not changes you",
+    "mailCta": "Subscribe",
+    "additionalLinks": [
+      { "label": "About", "href": "/about" },
+      { "label": "Catalog", "href": "/catalog" },
+      { "label": "Collection", "href": "/collection" },
+      { "label": "services", "href": "#" },
+      { "label": "FAQ", "href": "#" },
+      { "label": "Contact", "href": "#" }
+    ],
+    "contact": [
+      {
+        "label": "+201284963241",
+        "icon": "phone",
+        "href": "tel:+201284963241"
+      },
+      {
+        "label": "20 abd-elsalam aref St. Gleem, Alexandria, Egypt",
+        "icon": "location",
+        "href": "https://google.com/"
+      },
+      {
+        "label": "facebook",
+        "icon": "facebook",
+        "href": "https://facebook.com/"
+      },
+      {
+        "label": "instagram",
+        "icon": "instagram",
+        "href": "https://instagram.com/"
+      },
+      {
+        "label": "youtube",
+        "icon": "youtube",
+        "href": "https://youtube.com/"
+      },
+      {
+        "label": "X",
+        "icon": "x",
+        "href": "https://x.com/"
+      }
+    ]
   }
 }

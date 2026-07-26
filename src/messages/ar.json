@@ -1,7 +1,66 @@
 {
+  "Navbar": {
+    "logo": "كايلى",
+    "links": [
+      { "label": "الرئيسية", "href": "/" },
+      { "label": "عن كايلي", "href": "/about" },
+      { "label": "المتجر", "href": "/catalog" },
+      { "label": "المجموعات", "href": "/collection" }
+    ],
+    "cta": "تسجيل الدخول",
+    "bottomQuote": "لأنك تستحقى ألأفضل"
+  },
   "Hero": {
-    "headline": "كايلي",
-    "subheading": "جمالك يستحق الأفضل",
-    "cta": "تسوقي الآن"
+    "flag": "إعتنى ببشرتك من الطبيعة",
+    "headline": "تشرق بشرتك طبيعيا مع استخدامك لهذا المنتج",
+    "iconText": "لأن جمالك دائما يستحق الأفضل",
+    "cta": "تسوقي الآن",
+    "secondaryFlag": "اعتنى ببشرتك من الطبيعة",
+    "secondaryHeadline": "كن لطيفا مع بشرتك دائما",
+    "percentage": "100%",
+    "percentTitle": "طبيعى",
+    "bottomFlag": "دع بشرتك تشرق كالطبيعة من الطبيعة",
+    "bottomText": "الجمال الطبيعى يكمن فى العناية الطبيعية بالبشرة"
+  },
+  "Footer": {
+    "mailText": "المنتجات التي تبرز جمالك، لا تغير ملامحك",
+    "mailCta": "اشترك",
+    "additionalLinks": [
+      { "label": "الخدمات", "href": "#" },
+      { "label": "الأسئلة الشائعة", "href": "#" },
+      { "label": "اتصل بنا", "href": "#" }
+    ],
+    "contact": [
+      {
+        "label": "+201284963241",
+        "icon": "phone",
+        "href": "tel:+201284963241"
+      },
+      {
+        "label": "20 ش عبد السلام عارف. جليم, الإسكندرية, مصر",
+        "icon": "location",
+        "href": "https://google.com/"
+      },
+      {
+        "label": "فيسبوك",
+        "icon": "facebook",
+        "href": "https://facebook.com/"
+      },
+      {
+        "label": "إنستغرام",
+        "icon": "instagram",
+        "href": "https://instagram.com/"
+      },
+      {
+        "label": "يوتيوب",
+        "icon": "youtube",
+        "href": "https://youtube.com/"
+      },
+      {
+        "label": "X",
+        "icon": "x",
+        "href": "https://x.com/"
+      }
+    ]
   }
 }

@@ -1,9 +1,8 @@
-import Hero from '@/components/landing/Hero';
+import Hero from '@/components/landing/hero/HeroLayout';
 
 export default function HomePage() {
   return (
-    <div className="w-full min-h-dvh bg-background text-foreground space-y-4">
-      <Hero />
+    <div className="w-full min-h-dvh space-y-4">
       <Hero />
     </div>
   );

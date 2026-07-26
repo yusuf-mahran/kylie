@@ -1,10 +1,10 @@
-import { NextIntlClientProvider, hasLocale } from 'next-intl';
-import { notFound } from 'next/navigation';
+import { NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
-import { routing } from '@/i18n/routing';
 import { RTLProvider } from '@/providers/shared/rtl-provider';
 import type { Metadata } from 'next';
 import './globals.css';
+import Navbar from '@/components/shared/navigation/Navbar';
+import Footer from '@/components/shared/navigation/Footer';
 
 export const metadata: Metadata = {
   title: 'Kylie',
@@ -20,11 +20,9 @@ export default async function RootLayout({
 }) {
   const { locale } = await params;
 
-  if (!hasLocale(routing.locales, locale)) notFound();
-
   setRequestLocale(locale);
 
-  const messages = (await import(`../../messages/${locale}.json`)).default;
+  const messages = (await import(`@/messages/${locale}.json`)).default;
 
   const isArabic = locale === 'ar';
 
@@ -38,9 +36,15 @@ export default async function RootLayout({
       dir={isArabic ? 'rtl' : 'ltr'}
       className={`${fontVariables} ${fontClassNames} min-h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col overflow-x-hidden">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <RTLProvider>{children}</RTLProvider>
+          <RTLProvider>
+            <div className="mx-auto w-full max-w-[2180px] xl:px-8 px-4">
+              <Navbar />
+              <div className="w-full -mt-1">{children}</div>
+              <Footer />
+            </div>
+          </RTLProvider>
         </NextIntlClientProvider>
       </body>
     </html>

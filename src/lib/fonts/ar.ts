@@ -10,7 +10,7 @@ const cairo = Cairo({
 const tajawal = Tajawal({
   variable: '--font-tajawal',
   subsets: ['arabic'],
-  weight: ['400', '500'],
+  weight: ['400', '700'],
   display: 'swap',
 });
 
