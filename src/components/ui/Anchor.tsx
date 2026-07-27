@@ -1,6 +1,7 @@
 'use client';
 
-import { Link } from '@/i18n/navigation';
+import { Link as LinkIntl } from '@/i18n/navigation';
+import Link from 'next/link';
 import { ArrowUpward } from '@mui/icons-material';
 import { useParams } from 'next/navigation';
 
@@ -8,6 +9,7 @@ type AnchorProps = {
   href: string;
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   showIcon?: boolean;
+  noIntl?: boolean;
   children: React.ReactNode;
   className?: string;
 } & React.ComponentPropsWithoutRef<'a'>;
@@ -24,14 +26,26 @@ export default function Anchor({
   href,
   size = 'md',
   showIcon = false,
+  noIntl = false,
   className,
   children,
   ...props
 }: AnchorProps) {
   const { locale } = useParams();
 
+  if (noIntl)
+    return (
+      <Link
+        href={href}
+        className={`transition-all hover:text-primary-800 hover:font-semibold ${sizeStyles[size]} ${className ?? ''}`.trim()}
+        {...props}
+      >
+        {children}
+      </Link>
+    );
+
   return (
-    <Link
+    <LinkIntl
       href={href}
       className={`transition-all hover:text-primary-800 hover:font-semibold ${sizeStyles[size]} ${className ?? ''}`.trim()}
       {...props}
@@ -40,6 +54,6 @@ export default function Anchor({
       {showIcon && (
         <ArrowUpward className={locale === 'ar' ? '-rotate-45' : 'rotate-45'} />
       )}
-    </Link>
+    </LinkIntl>
   );
 }

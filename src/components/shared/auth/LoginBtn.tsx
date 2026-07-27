@@ -1,3 +1,5 @@
+'use client';
+
 import Btn from '@/components/ui/Btn';
 import { useTranslations } from 'next-intl';
 import { ComponentPropsWithoutRef } from 'react';
@@ -10,7 +12,7 @@ export default function LoginBtn({ variant, ...props }: LoginBtnProps) {
   const t = useTranslations('Navbar');
 
   return (
-    <Btn variant={variant} {...props}>
+    <Btn variant={variant} as="a" href="/login" {...props}>
       {t('cta')}
     </Btn>
   );

@@ -5,10 +5,11 @@ import { ComponentPropsWithoutRef, ReactElement, useId } from 'react';
 
 type BtnProps = ComponentPropsWithoutRef<'button'> & {
   variant?: 'primary' | 'secondary' | 'icon';
+  as?: 'a' | 'button';
   icon?: ReactElement;
   showIconBg?: boolean;
   iconPadding?: string;
-};
+} & { href?: string };
 
 const variantStyles: Record<string, string> = {
   primary: 'bg-primary-500 text-white',
@@ -18,6 +19,8 @@ const variantStyles: Record<string, string> = {
 
 export default function Btn({
   variant = 'primary',
+  as = 'button',
+  href,
   icon,
   showIconBg = true,
   iconPadding = 'p-1',
@@ -26,6 +29,9 @@ export default function Btn({
   ...props
 }: BtnProps) {
   const uid = useId();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Element = as as any;
 
   const overlayBg =
     variant === 'primary'
@@ -59,7 +65,8 @@ export default function Btn({
           top: 2px;
         }
       `}</style>
-      <button
+      <Element
+        href={href}
         className={clsx(
           'flex justify-center items-center cursor-pointer relative rounded-default text-sm font-medium transition-colors duration-300 z-1 overflow-hidden',
           showIconBg
@@ -80,7 +87,7 @@ export default function Btn({
         ) : (
           children
         )}
-      </button>
+      </Element>
     </>
   );
 }

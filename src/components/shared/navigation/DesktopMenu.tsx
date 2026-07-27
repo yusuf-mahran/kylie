@@ -1,5 +1,3 @@
-'use client';
-
 import Anchor from '@/components/ui/Anchor';
 
 type NavItem = {

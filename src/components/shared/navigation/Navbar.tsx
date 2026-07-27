@@ -7,13 +7,11 @@ import DesktopMenu from '@/components/shared/navigation/DesktopMenu';
 import Btn from '@/components/ui/Btn';
 import MobileMenu from '@/components/shared/navigation/MobileMenu';
 import { Menu, ShoppingCartOutlined } from '@mui/icons-material';
-import { useRouter } from 'next/navigation';
 import LoginBtn from '@/components/shared/auth/LoginBtn';
 import GlassBg from '@/components/ui/GlassBg';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const router = useRouter();
   const t = useTranslations('Navbar');
   const items = t.raw('links') as { label: string; href: string }[];
 
@@ -25,8 +23,9 @@ export default function Navbar() {
       <div className="flex items-center gap-1">
         <Btn
           variant="icon"
+          as="a"
+          href="/cart"
           icon={<ShoppingCartOutlined className="text-black" />}
-          onClick={() => router.push('/cart')}
           aria-label="Display Cart Page"
         />
         <LoginBtn variant="secondary" className="hidden md:inline-flex" />

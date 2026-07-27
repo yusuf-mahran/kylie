@@ -26,8 +26,11 @@
     "mailText": "المنتجات التي تبرز جمالك، لا تغير ملامحك",
     "mailCta": "اشترك",
     "additionalLinks": [
+      { "label": "عن كايلي", "href": "/about" },
+      { "label": "المتجر", "href": "/catalog" },
+      { "label": "المجموعات", "href": "/collection" },
       { "label": "الخدمات", "href": "#" },
-      { "label": "الأسئلة الشائعة", "href": "#" },
+      { "label": "الأسئلة", "href": "#" },
       { "label": "اتصل بنا", "href": "#" }
     ],
     "contact": [

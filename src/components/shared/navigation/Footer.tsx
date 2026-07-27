@@ -39,7 +39,7 @@ export default async function Footer() {
           <Typography variant="h3" as="h2">
             {tFooter('mailText')}
           </Typography>
-          <form className="w-full h-7 border-2 border-border rounded-default flex justify-between items-center p-2 gap-2">
+          <form className="w-full h-7 border-2 border-border rounded-default flex justify-between items-center p-1 gap-2">
             <input
               type="email"
               name="email"
