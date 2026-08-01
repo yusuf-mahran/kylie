@@ -27,7 +27,7 @@ export default function Img({
         alt={alt}
         width={width}
         height={height}
-        className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105 group-hover:rotate-3"
+        className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-110 group-hover:rotate-3"
         {...props}
       />
     </RoundedContainer>

@@ -37,7 +37,7 @@ export default function Anchor({
     return (
       <Link
         href={href}
-        className={`transition-all hover:text-primary-800 hover:font-semibold ${sizeStyles[size]} ${className ?? ''}`.trim()}
+        className={`transition-all hover:text-primary-700 ${sizeStyles[size]} ${className ?? ''}`.trim()}
         {...props}
       >
         {children}
@@ -47,7 +47,7 @@ export default function Anchor({
   return (
     <LinkIntl
       href={href}
-      className={`transition-all hover:text-primary-800 hover:font-semibold ${sizeStyles[size]} ${className ?? ''}`.trim()}
+      className={`transition-all hover:text-primary-700 ${sizeStyles[size]} ${className ?? ''}`.trim()}
       {...props}
     >
       {children}

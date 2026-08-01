@@ -17,8 +17,16 @@
       "path": "./src/components",
     },
     {
+      "name": "🏭 repositories",
+      "path": "./src/repositories",
+    },
+    {
       "name": "🧰 lib",
       "path": "./src/lib",
+    },
+    {
+      "name": "🧪 hooks",
+      "path": "./src/hooks",
     },
     {
       "name": "🔌 providers",

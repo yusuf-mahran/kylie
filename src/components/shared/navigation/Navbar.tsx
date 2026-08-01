@@ -7,7 +7,7 @@ import DesktopMenu from '@/components/shared/navigation/DesktopMenu';
 import Btn from '@/components/ui/Btn';
 import MobileMenu from '@/components/shared/navigation/MobileMenu';
 import { Menu, ShoppingCartOutlined } from '@mui/icons-material';
-import LoginBtn from '@/components/shared/auth/LoginBtn';
+import LoginBtn from '@/components/shared/common/auth/LoginBtn';
 import GlassBg from '@/components/ui/GlassBg';
 
 export default function Navbar() {

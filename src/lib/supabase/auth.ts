@@ -5,13 +5,36 @@
  */
 
 import { supabase } from './client';
+import { isAuthError } from '@supabase/supabase-js';
 import type { Provider, Session, User } from '@supabase/supabase-js';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
+export interface AuthErrorInfo {
+  code: string;
+  message: string;
+}
+
 export interface AuthResult<T = null> {
   data: T;
-  error: string | null;
+  error: AuthErrorInfo | null;
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+export function normalizeAuthError(error: unknown): AuthErrorInfo {
+  if (isAuthError(error)) {
+    return {
+      code: error.code ?? 'unexpected_failure',
+      message: error.message,
+    };
+  }
+
+  if (error instanceof Error) {
+    return { code: 'unexpected_failure', message: error.message };
+  }
+
+  return { code: 'unexpected_failure', message: 'Unknown error' };
 }
 
 // ─── Sign up ─────────────────────────────────────────────────────────────────
@@ -35,8 +58,15 @@ export async function signUpWithEmail(
       user: data.user,
       session: data.session,
     },
-    error: error?.message ?? null,
+    error: error ? normalizeAuthError(error) : null,
   };
+}
+
+export async function resendEmailConfirmation(email: string): Promise<void> {
+  await supabase.auth.resend({
+    type: 'signup',
+    email,
+  });
 }
 
 // ─── Sign in ─────────────────────────────────────────────────────────────────
@@ -51,7 +81,7 @@ export async function signInWithEmail(
   });
   return {
     data: { session: data.session, user: data.user },
-    error: error?.message ?? null,
+    error: error ? normalizeAuthError(error) : null,
   };
 }
 
@@ -67,7 +97,7 @@ export async function signInWithMagicLink(
     email,
     options: { emailRedirectTo: redirectTo },
   });
-  return { data: null, error: error?.message ?? null };
+  return { data: null, error: error ? normalizeAuthError(error) : null };
 }
 
 /**
@@ -82,14 +112,14 @@ export async function signInWithOAuth(
     provider,
     options: { redirectTo },
   });
-  return { data: null, error: error?.message ?? null };
+  return { data: null, error: error ? normalizeAuthError(error) : null };
 }
 
 // ─── Sign out ─────────────────────────────────────────────────────────────────
 
 export async function signOut(): Promise<AuthResult> {
   const { error } = await supabase.auth.signOut();
-  return { data: null, error: error?.message ?? null };
+  return { data: null, error: error ? normalizeAuthError(error) : null };
 }
 
 // ─── Session & user ───────────────────────────────────────────────────────────
@@ -115,12 +145,12 @@ export async function sendPasswordResetEmail(
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo,
   });
-  return { data: null, error: error?.message ?? null };
+  return { data: null, error: error ? normalizeAuthError(error) : null };
 }
 
 export async function updatePassword(newPassword: string): Promise<AuthResult> {
   const { error } = await supabase.auth.updateUser({ password: newPassword });
-  return { data: null, error: error?.message ?? null };
+  return { data: null, error: error ? normalizeAuthError(error) : null };
 }
 
 export async function updatePasswordWithToken(
@@ -133,10 +163,10 @@ export async function updatePasswordWithToken(
     token,
     type: 'recovery',
   });
-  if (otpError) return { data: null, error: otpError.message };
+  if (otpError) return { data: null, error: normalizeAuthError(otpError) };
 
   const { error } = await supabase.auth.updateUser({ password: newPassword });
-  return { data: null, error: error?.message ?? null };
+  return { data: null, error: error ? normalizeAuthError(error) : null };
 }
 
 // ─── Auth state listener ──────────────────────────────────────────────────────

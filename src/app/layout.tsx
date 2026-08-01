@@ -14,9 +14,7 @@ export default async function RootLayout({
   return (
     <html className={`min-h-full antialiased`}>
       <body className="min-h-full flex flex-col overflow-x-hidden">
-        <div className="mx-auto w-full max-w-[2180px] xl:px-8 px-4">
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   );

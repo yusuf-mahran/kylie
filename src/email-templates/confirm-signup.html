@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirm Your Email</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f8f2f5;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        color: #3d0a1b;
+      }
+
+      .wrapper {
+        width: 100%;
+        padding: 40px 20px;
+        box-sizing: border-box;
+      }
+
+      .container {
+        max-width: 520px;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1px solid #eadbe3;
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .header {
+        background: #c20e4a;
+        color: #ffffff;
+        padding: 32px 24px;
+        text-align: center;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .content {
+        padding: 40px 32px;
+        text-align: center;
+      }
+
+      .content h2 {
+        margin: 0 0 16px;
+        font-size: 26px;
+        color: #3d0a1b;
+      }
+
+      .content p {
+        margin: 0 0 16px;
+        color: #5b5560;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+
+      .code {
+        margin: 32px 0;
+        padding: 20px;
+        border: 2px dashed #c20e4a;
+        border-radius: 10px;
+        background: #fdebf2;
+        color: #c20e4a;
+        font-size: 34px;
+        font-weight: 700;
+        font-family: Consolas, Monaco, monospace;
+        letter-spacing: 8px;
+      }
+
+      .info {
+        font-size: 14px;
+        color: #777;
+        line-height: 1.6;
+      }
+
+      .footer {
+        padding: 24px;
+        text-align: center;
+        font-size: 13px;
+        color: #8b8790;
+        background: #fcf9fb;
+        border-top: 1px solid #eadbe3;
+      }
+
+      .preheader {
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+        color: transparent;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="preheader">
+      Verify your email address to activate your Kylie account.
+    </div>
+
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <h1>Kylie</h1>
+        </div>
+
+        <div class="content">
+          <h2>Welcome to Kylie ✨</h2>
+
+          <p>
+            Thanks for creating your account! To complete your registration,
+            please verify your email address using the code below.
+          </p>
+
+          <div class="code">{{ .Token }}</div>
+
+          <p class="info">
+            This verification code will expire in <strong>10 minutes</strong>.
+          </p>
+
+          <p class="info">
+            If you didn't create a Kylie account, you can safely ignore this
+            email. No account will be activated without verification.
+          </p>
+        </div>
+
+        <div class="footer">
+          <span>© 2026 Kylie. All rights reserved.</span>
+          <span>{{ .SiteURL }}</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

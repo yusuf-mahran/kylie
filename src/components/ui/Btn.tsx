@@ -80,13 +80,12 @@ export default function Btn({
         )}
         {...props}
       >
-        {variant === 'icon' && icon ? (
+        {icon && (
           <span className="flex items-center justify-center size-5">
             {icon}
           </span>
-        ) : (
-          children
         )}
+        {variant !== 'icon' && children}
       </Element>
     </>
   );

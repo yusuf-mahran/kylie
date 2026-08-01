@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phone Number Updated</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f8f2f5;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        color: #3d0a1b;
+      }
+
+      .wrapper {
+        width: 100%;
+        padding: 40px 20px;
+        box-sizing: border-box;
+      }
+
+      .container {
+        max-width: 520px;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1px solid #eadbe3;
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .header {
+        background: #c20e4a;
+        color: #ffffff;
+        padding: 32px 24px;
+        text-align: center;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .content {
+        padding: 40px 32px;
+        text-align: center;
+      }
+
+      .icon {
+        font-size: 52px;
+        margin-bottom: 16px;
+      }
+
+      .content h2 {
+        margin: 0 0 16px;
+        font-size: 26px;
+        color: #3d0a1b;
+      }
+
+      .content p {
+        margin: 0 0 16px;
+        color: #5b5560;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+
+      .details {
+        margin: 28px 0;
+        background: #fdebf2;
+        border: 1px solid #f3c5d4;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: left;
+      }
+
+      .details table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .details td {
+        padding: 8px 0;
+        font-size: 14px;
+      }
+
+      .label {
+        color: #7a6d74;
+        width: 40%;
+      }
+
+      .value {
+        color: #3d0a1b;
+        font-weight: 600;
+        word-break: break-word;
+      }
+
+      .notice {
+        margin-top: 28px;
+        padding: 18px;
+        background: #fff6f8;
+        border-left: 4px solid #c20e4a;
+        border-radius: 8px;
+        text-align: left;
+        color: #5b5560;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .footer {
+        padding: 24px;
+        text-align: center;
+        font-size: 13px;
+        color: #8b8790;
+        background: #fcf9fb;
+        border-top: 1px solid #eadbe3;
+      }
+
+      .preheader {
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+        color: transparent;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="preheader">
+      Your Kylie account phone number has been updated.
+    </div>
+
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <h1>Kylie</h1>
+        </div>
+
+        <div class="content">
+          <div class="icon">📱</div>
+
+          <h2>Phone Number Updated</h2>
+
+          <p>
+            The phone number associated with your Kylie account has been
+            successfully updated.
+          </p>
+
+          <div class="details">
+            <table>
+              <tr>
+                <td class="label">Account</td>
+                <td class="value">{{ .Email }}</td>
+              </tr>
+              <tr>
+                <td class="label">Previous Number</td>
+                <td class="value">{{ .OldPhone }}</td>
+              </tr>
+              <tr>
+                <td class="label">New Number</td>
+                <td class="value">{{ .Phone }}</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="notice">
+            <strong>Didn't make this change?</strong><br /><br />
+            If you didn't update your phone number, your account may have been
+            accessed without your permission. Please reset your password
+            immediately and contact our support team as soon as possible.
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>© 2026 Kylie. All rights reserved.</span>
+          <span>{{ .SiteURL }}</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

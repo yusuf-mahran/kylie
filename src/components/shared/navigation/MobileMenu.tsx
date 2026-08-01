@@ -13,7 +13,7 @@ import RoundedContainer from '@/components/ui/RoundedContainer';
 import Logo from '@/components/ui/Logo';
 import Anchor from '@/components/ui/Anchor';
 import Img from '@/components/ui/Img';
-import LoginBtn from '@/components/shared/auth/LoginBtn';
+import LoginBtn from '@/components/shared/common/auth/LoginBtn';
 import { Typography } from '@/components/ui/Typography';
 
 type NavItem = { label: string; href: string };

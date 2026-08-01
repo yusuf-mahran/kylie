@@ -1,9 +1,9 @@
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { RTLProvider } from '@/providers/shared/rtl-provider';
+import { AuthProvider } from '@/providers/auth/auth-provider';
+import { ToastProvider } from '@/providers/shared/toast-provider';
 import type { Metadata } from 'next';
-import Navbar from '@/components/shared/navigation/Navbar';
-import Footer from '@/components/shared/navigation/Footer';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 
@@ -35,17 +35,19 @@ export default async function RootLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <RTLProvider>
-        <div
-          lang={locale}
-          dir={isArabic ? 'rtl' : 'ltr'}
-          className={`${fontVariables} ${fontClassNames} mx-auto w-full max-w-[2180px] xl:px-8 px-4`}
-        >
-          <Navbar />
-          <div className="w-full -mt-1">{children}</div>
-          <Footer />
-        </div>
-      </RTLProvider>
+      <AuthProvider>
+        <ToastProvider>
+          <RTLProvider>
+            <div
+              lang={locale}
+              dir={isArabic ? 'rtl' : 'ltr'}
+              className={`${fontVariables} ${fontClassNames} w-full mx-auto`}
+            >
+              {children}
+            </div>
+          </RTLProvider>
+        </ToastProvider>
+      </AuthProvider>
     </NextIntlClientProvider>
   );
 }
