@@ -41,7 +41,7 @@ export default async function RootLayout({
             <div
               lang={locale}
               dir={isArabic ? 'rtl' : 'ltr'}
-              className={`${fontVariables} ${fontClassNames} w-full mx-auto`}
+              className={`${fontVariables} ${fontClassNames} w-full mx-auto overflow-x-hidden`}
             >
               {children}
             </div>

@@ -42,6 +42,7 @@ export default function NotFound() {
                   src="/imgs/red_cloud.png"
                   width={1080}
                   height={1080}
+                  loading="eager"
                   className="w-full h-full bg-transparent"
                 />
               </span>
